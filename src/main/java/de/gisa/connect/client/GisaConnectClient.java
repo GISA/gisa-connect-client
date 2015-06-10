@@ -27,9 +27,8 @@ public class GisaConnectClient implements Closeable
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(host);
         factory.setVirtualHost("VH_ppu");
-        // FIXME: wrum geht hier nur "guest"?
-        factory.setUsername("guest");
-        factory.setPassword("guest");
+        factory.setUsername(username);
+        factory.setPassword(password);
         connection = factory.newConnection();
         channel = connection.createChannel(); // FIXME: 1 Channel für alles?
                                               // FIXME: connection schließen,

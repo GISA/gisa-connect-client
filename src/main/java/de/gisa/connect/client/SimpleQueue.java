@@ -74,7 +74,6 @@ public class SimpleQueue
         
         public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
         {
-            System.err.println(envelope.getRoutingKey());
             synchronized (messages)
             {
                 messages.add(new Message(envelope.getRoutingKey(),body));
