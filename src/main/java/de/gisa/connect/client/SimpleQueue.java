@@ -34,6 +34,11 @@ public class SimpleQueue
         }
     }
     
+    public boolean isEmpty()
+    {
+        return getMessageCount()==0;
+    }
+    
     public int getMessageCount()
     {
         synchronized (messages)
