@@ -2,15 +2,12 @@ package de.gisa.connect.client;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.concurrent.TimeoutException;
 
-import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.Consumer;
-import com.rabbitmq.client.Envelope;
-import com.rabbitmq.client.ShutdownSignalException;
 
 public class GisaConnectClient implements Closeable
 {
@@ -22,10 +19,15 @@ public class GisaConnectClient implements Closeable
 
     protected final String exchangeName;
 
-    public GisaConnectClient(String host, String username, String password) throws IOException, TimeoutException
+    public GisaConnectClient(String host, boolean useSsl, String username, String password) throws IOException, TimeoutException, GeneralSecurityException
     {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(host);
+        if (useSsl)
+        {
+            factory.setPort(5671);
+            factory.useSslProtocol();
+        }
         factory.setVirtualHost("VH_ppu");
         factory.setUsername(username);
         factory.setPassword(password);
