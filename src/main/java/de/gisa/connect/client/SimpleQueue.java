@@ -2,27 +2,31 @@ package de.gisa.connect.client;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Consumer;
 import com.rabbitmq.client.Envelope;
 import com.rabbitmq.client.ShutdownSignalException;
-import com.rabbitmq.client.AMQP.BasicProperties;
 
 public class SimpleQueue
 {
     public static class Message
     {
+        protected String messageId;
         protected String routingKey;
         protected byte[] payload;
         
-        public Message(String routingKey, byte[] payload)
+        public Message(String messageId, String routingKey, byte[] payload)
         {
             super();
+            this.messageId = messageId;
             this.routingKey = routingKey;
             this.payload = payload;
+        }
+        public String getMessageId()
+        {
+            return messageId;
         }
         public String getRoutingKey()
         {
@@ -31,6 +35,10 @@ public class SimpleQueue
         public byte[] getPayload()
         {
             return payload;
+        }
+        public String getPayloadAsString()
+        {
+            return payload==null?null:new String(payload);
         }
     }
     
@@ -64,6 +72,10 @@ public class SimpleQueue
         }
     }
     
+    public List<Message> getMessages()
+    {
+        return messages;
+    }
     
     protected final List<Message> messages=new ArrayList<Message>();
     
@@ -81,7 +93,7 @@ public class SimpleQueue
         {
             synchronized (messages)
             {
-                messages.add(new Message(envelope.getRoutingKey(),body));
+                messages.add(new Message(properties.getMessageId(),envelope.getRoutingKey(),body));
                 messages.notify();
             }
         }

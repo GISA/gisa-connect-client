@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.concurrent.TimeoutException;
 
+import com.rabbitmq.client.AMQP.BasicProperties;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.MessageProperties;
 
 public class GisaConnectClient implements Closeable
 {
@@ -15,11 +17,9 @@ public class GisaConnectClient implements Closeable
 
     protected final Channel channel;
 
-    protected final String userPrefix;
-
     protected final String exchangeName;
 
-    public GisaConnectClient(String host, boolean useSsl, String username, String password) throws IOException, TimeoutException, GeneralSecurityException
+    public GisaConnectClient(String host, boolean useSsl, String username, String password, String exchangeName) throws IOException, TimeoutException, GeneralSecurityException
     {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(host);
@@ -28,27 +28,43 @@ public class GisaConnectClient implements Closeable
             factory.setPort(5671);
             factory.useSslProtocol();
         }
-        factory.setVirtualHost("VH_ppu");
+        factory.setVirtualHost("gisa");
         factory.setUsername(username);
         factory.setPassword(password);
         connection = factory.newConnection();
-        channel = connection.createChannel(); // FIXME: 1 Channel für alles?
-                                              // FIXME: connection schließen,
-                                              // wenn Channel-create fehlschlägt
-
-        userPrefix = username + ".";
-        exchangeName = username + ".EXCHANGE";
+        try
+        {
+            channel = connection.createChannel();
+            channel.confirmSelect(); // Message-Confirm aktivieren
+        }
+        catch (Exception ex)
+        {
+            connection.close();
+            throw(ex);
+        }
+        this.exchangeName=exchangeName;
     }
 
-    public void publish(String routingTag, byte[] payload) throws IOException
+    public synchronized void publishMessage(String messageId, String routingKey, byte[] payload) throws Exception
     {
-        channel.basicPublish(exchangeName, userPrefix + routingTag, null, payload);
+        BasicProperties props=MessageProperties.MINIMAL_BASIC
+                .builder()
+                .contentType("text/plain")
+                .messageId(messageId) // eindeutige MessageID
+                .deliveryMode(2) // DeliveryMode "Persist"
+                .build();
+        
+        channel.basicPublish(exchangeName, routingKey, props, payload);
+        
+        // Bleibt das confirm aus, erzeugt dies eine IOException.
+        // hier wird maximal 1000ms (1 Sekunde) gewartet
+        channel.waitForConfirmsOrDie(1000L);
     }
 
     public SimpleQueue consume(String queueName) throws IOException
     {
         SimpleQueue simpleQueue=new SimpleQueue();
-        channel.basicConsume(userPrefix+queueName, true, simpleQueue.consumer);
+        channel.basicConsume(queueName, true, simpleQueue.consumer);
         return simpleQueue;
     }
 
