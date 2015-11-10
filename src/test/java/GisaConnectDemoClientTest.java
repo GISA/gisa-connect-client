@@ -1,3 +1,14 @@
+/**
+ * Copyright GISA GmbH, 2015
+ * 
+ * Muster-Anwendung, die sich als Client zur Plattform gisa.CONNECT verbindet.
+ * Diese Musteranwendung ist nicht für den produktiven Einsatz geeignet, sondern soll
+ * das Verfahren verdeutlichen.
+ * 
+ * Weitere Erläuterungen finden sich in @see de.gisa.connect.client.GisaConnectClient
+ * 
+ */
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.contains;
