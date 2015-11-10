@@ -5,12 +5,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.rabbitmq.client.AMQP;
+import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Consumer;
 import com.rabbitmq.client.Envelope;
 import com.rabbitmq.client.ShutdownSignalException;
 
 public class SimpleQueue
 {
+    final Channel channel;
+    
+    public SimpleQueue(Channel channel)
+    {
+        /**
+         * Der Queue-Client verwendet eine Referenz zum Channel, um ACKs zu senden
+         */
+        this.channel=channel;
+    }
+    
     public static class Message
     {
         protected String messageId;
@@ -95,6 +106,21 @@ public class SimpleQueue
             {
                 messages.add(new Message(properties.getMessageId(),envelope.getRoutingKey(),body));
                 messages.notify();
+                
+                try
+                {
+                    channel.basicAck(envelope.getDeliveryTag(), false);
+                }
+                catch (IOException ex)
+                {
+                    /**
+                     * Das ACK konnte nicht verschickt werden. Fehlerbehandlung bzw. loggen.
+                     * Da ACK möglich war, wird die Plattform die Nachricht bei der nächsten
+                     * Verbindung erneut senden. Es liegt in der Verantwortung des Clients,
+                     * mit mehrfach zugestellten Messages umzugehen. 
+                     */
+                    ex.printStackTrace();
+                }
             }
         }
         

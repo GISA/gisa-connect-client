@@ -29,6 +29,7 @@ public class GisaConnectClient implements Closeable
     {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(host);
+        // Auf der Plattform wird ausschließlich via SSL kommuniziert
         if (useSsl)
         {
             factory.setPort(5671);
@@ -37,11 +38,25 @@ public class GisaConnectClient implements Closeable
         factory.setVirtualHost("gisa");
         factory.setUsername(username);
         factory.setPassword(password);
+        
+        /**
+         * Die Heartbeat- und Recover-Funktionen stellen sicher, dass Verbindungsabbrüche erkannt und
+         * die Verbindung neu aufgebaut wird. In Verbindung mit Message-Confirm beim Senden sowie der
+         * Bestätigung von empfangenen Nachrichten erst nachdem diese verarbeitet wurden kann sichergestellt
+         * werden, dass Nachrichten gesichert zugestellt werden.
+         */
+        factory.setRequestedHeartbeat(2); // Timeput in Sekunden. Das Heartbeat-Intervall entspricht die Hälfte der Zeit. 
+        factory.setAutomaticRecoveryEnabled(true);
+        factory.setTopologyRecoveryEnabled(true);
+        factory.setNetworkRecoveryInterval(5000); // in Millisekunden
+        
         connection = factory.newConnection();
         try
         {
             channel = connection.createChannel();
-            channel.confirmSelect(); // Message-Confirm aktivieren
+            // Message-Confirm aktivieren: die Plattform bestätigt den Erhalt aller Nachrichten
+            // diese Funltion muss pro Channel aktiviert werden 
+            channel.confirmSelect();
         }
         catch (Exception ex)
         {
@@ -69,8 +84,17 @@ public class GisaConnectClient implements Closeable
 
     public SimpleQueue consume(String queueName) throws IOException
     {
-        SimpleQueue simpleQueue=new SimpleQueue();
-        channel.basicConsume(queueName, true, simpleQueue.consumer);
+        /**
+         *  Im Beispiel-Client wird ein Channel zum Senden und Empfangen verwendet. Beim Produktiven Einsatz sollten
+         *  getrennte Channels verwendet werden.
+         */
+        SimpleQueue simpleQueue=new SimpleQueue(channel);
+        
+        /**
+         * Die Funktion autoAck wird deaktiviert. Der Consumer ist verantwortlich, ein ACK zu senden, nachdem die Nachricht lokal
+         * verarbeitet bzw. persistiert wurde,  
+         */
+        channel.basicConsume(queueName, false, simpleQueue.consumer);
         return simpleQueue;
     }
 
