@@ -1,6 +1,11 @@
 /**
  * Copyright GISA GmbH, 2015
  * 
+ * Muster-Anwendung, die sich als Client zur Plattform gisa.CONNECT verbindet.
+ * Diese Musteranwendung ist nicht für den produktiven Einsatz geeignet, sondern soll
+ * das Verfahren verdeutlichen.
+ * 
+ * Weitere Erläuterungen finden sich in @see GisaConnectDemoClient
  * 
  */
 
