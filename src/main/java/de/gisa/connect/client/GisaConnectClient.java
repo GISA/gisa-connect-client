@@ -1,3 +1,9 @@
+/**
+ * Copyright GISA GmbH, 2015
+ * 
+ * 
+ */
+
 package de.gisa.connect.client;
 
 import java.io.Closeable;
