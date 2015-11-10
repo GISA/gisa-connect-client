@@ -29,8 +29,10 @@ import de.gisa.connect.client.SimpleQueue;
  * - Nachrichten müssen mit einer eindeutigen Message-ID verschickt werden.
  * - Für den Versand muss "Publish-Confirm" verwendet werden. Dies stellt sicher, dass eine Nachricht von der Plattform korrekt verarbeitet wurde.
  *   Bleibt die Bestätigung aus, ist die Nachricht erneut zu senden.
- * - TODO: Das Auto-Connect-Feature sollte verwendet werden
- * - TODO: Der Consumer sollte den Erhalt der Nachricht erst bestätigen, wenn diese verarbeitet wurde  
+ * - Das Auto-Connect-Feature des Clients sollte verwendet werden
+ * - Der Consumer sollte den Erhalt von Nachrichten explitit bestätigen, wenn diese verarbeitet wurden. Die Funktion autoAck sollte daher nicht
+ *   verwendet werden.  
+ * - Es ist sinnvoll, unterschiedliche Channels zum Schreiben und Lesen zu verwenden. 
  * 
  * Der Beispielcode zeigt eine mögliche Umsetzung dieser Rahmenbedingungen mit dem Java-Client.
  *  
