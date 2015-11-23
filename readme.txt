@@ -11,7 +11,6 @@ welches für einen produktiven Einsatz angepasst werden muss.
 GISA übernimmt daher keine Haftung für Folgen und Schäden, die aus der Verwendung dieses
 Programmbeispiels resultieren.
 
-
 Das Programmierbeispiel besteht aus einem Client de.gisa.connect.client.GisaConnectClient sowie
 einem erklärenden Testfall GisaConnectDemoClientTest. 
 
@@ -32,3 +31,13 @@ Funk 	0172 7930641
 PC-Fax 	0345 585-100-2452
 E-Mail 	Jos.Anthonijsz@gisa.de
 Internet 	www.gisa.de
+
+
+
+Sofern vertraglich nicht anderes vereinbart ist bleibt GISA hinsichtlich aller im o. g. Projekt
+eingebrachten bzw. entwickelten Leistungsgegenstände alleinige und ausschließliche Eigentümerin 
+aller Designs, Verfahren, Techniken, Konzepte, Verbesserungen, Entdeckungen, Ideen und Erfindungen 
+unabhängig davon, ob diese patentfähig sind oder nicht, ob sie in Zusammenhang mit den Leistungen 
+genutzt werden, hergestellt werden oder entstanden sind, sowie aller damit verbundener Patente, 
+Urheberrechte, Geschäftsgeheimnisse und des gesamten sonstigen damit verbundenen geistigen 
+Eigentums.
