@@ -8,6 +8,7 @@
  * Weitere Erläuterungen finden sich in @see de.gisa.connect.client.GisaConnectClient
  * 
  */
+package de.gisa.connect.client;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
