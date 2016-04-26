@@ -1,6 +1,6 @@
-Muster-Programm für die Anbindung von Clients an die Plattform gisa.CONNECT
+# Muster-Programm für die Anbindung von Clients an die Plattform gisa.CONNECT
 
-
+## Beschreibung
 GISA GmbH stellt ein Programmierbeispiel zur Verfügung. Dieses dient der Darstellung, 
 welche Prinzipien und Techniken für eine Anbindung zum Einsatz kommen sollen.
 
@@ -11,27 +11,22 @@ welches für einen produktiven Einsatz angepasst werden muss.
 GISA übernimmt daher keine Haftung für Folgen und Schäden, die aus der Verwendung dieses
 Programmbeispiels resultieren.
 
-Das Programmierbeispiel besteht aus einem Client de.gisa.connect.client.GisaConnectClient sowie
-einem erklärenden Testfall GisaConnectDemoClientTest. 
-
+Das Programmierbeispiel besteht aus einem Client `de.gisa.connect.client.GisaConnectClient` sowie
+einem erklärenden Testfall `de.gisa.connect.client.GisaConnectDemoClientTest`. 
 
 
 Aktueller Ansprechpartner für Fragen zur Anbindung ist
  
-Jos Anthonijsz
-Bereichsleiter Innovation und PreSales
-Head of GISA InnovationCenter
+Jos Anthonijsz<br />
+Bereichsleiter Innovation und PreSales<br />
+Head of GISA InnovationCenter<br />
  
-GISA GmbH
-Leipziger Chaussee 191a
-06112 Halle (Saale)
+GISA GmbH<br />
+Leipziger Chaussee 191a<br />
+06112 Halle (Saale)<br />
 
-Telefon 0345 585-2452
-Funk 	0172 7930641
-PC-Fax 	0345 585-100-2452
-E-Mail 	Jos.Anthonijsz@gisa.de
-Internet 	www.gisa.de
-
+E-Mail 	Jos.Anthonijsz@gisa.de<br />
+Internet 	[www.gisa.de](url "www.gisa.de") 
 
 
 Sofern vertraglich nicht anderes vereinbart ist bleibt GISA hinsichtlich aller im o. g. Projekt
