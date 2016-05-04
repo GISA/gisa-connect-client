@@ -44,7 +44,7 @@ public class GisaConnectClient implements Closeable
         factory.setUsername(username);
         factory.setPassword(password);
         
-        /**
+        /*
          * Die Heartbeat- und Recover-Funktionen stellen sicher, dass Verbindungsabbrüche erkannt und
          * die Verbindung neu aufgebaut wird. In Verbindung mit Message-Confirm beim Senden sowie der
          * Bestätigung von empfangenen Nachrichten erst nachdem diese verarbeitet wurden kann sichergestellt

@@ -23,30 +23,31 @@ import de.gisa.connect.client.GisaConnectClient;
 import de.gisa.connect.client.SimpleQueue;
 
 /**
- * Dieser Beispielcode zeigt exemplarisch die Kommunikation über die gisa.CONNECT Plattform.
+ * <p>Dieser Beispielcode zeigt exemplarisch die Kommunikation über die gisa.CONNECT Plattform.
  * 
- * Für diese Demonstration wurden die folgenden Benutzer, Verträge und Routing angelegt:
+ * <p>Für diese Demonstration wurden die folgenden Benutzer, Verträge und Routing angelegt:
  * 
+ * <pre>
  * Benutzer "demo1", Kennwort "aoQuIXie", Exchange "demo1-ex", Queue "demo1-q-queue1"
  * Benutzer "demo2", Kennwort "IelaitCw", Exchange "demo2-ex", Queue "demo2-q-queue1"
  * 
  * Vertrag: von "demo1" mit Routing-Key "demo1.demo1tag1" in Queue "demo2-q-queue1"
  * Vertrag: von "demo2" mit Routing-Key "demo2.demo2tag1" in Queue "demo1-q-queue1"
+ * </pre>
  * 
- * 
- * Für die Kommunikation mit der Plattform müssen die folgenden Rahmenbedingungen eingehalten werden:
- *
- * - Beim Lesen einer Queue ist die "consume"-Funktion zu verwenden. Ein zyklisches Polling von Queues ist nicht erlaubt.
- * - Nachrichten müssen mit DeliveryMode 2 (persist) eingeliefert werden. Das stellt sicher, dass Nachrichten vor der Empfangsbestätigung persistiert werden.
- * - Nachrichten müssen mit einer eindeutigen Message-ID verschickt werden.
- * - Für den Versand muss "Publish-Confirm" verwendet werden. Dies stellt sicher, dass eine Nachricht von der Plattform korrekt verarbeitet wurde.
+ * <p>Für die Kommunikation mit der Plattform müssen die folgenden Rahmenbedingungen eingehalten werden:
+ * <ul>
+ * <li> Beim Lesen einer Queue ist die "consume"-Funktion zu verwenden. Ein zyklisches Polling von Queues ist nicht erlaubt.
+ * <li> Nachrichten müssen mit DeliveryMode 2 (persist) eingeliefert werden. Das stellt sicher, dass Nachrichten vor der Empfangsbestätigung persistiert werden.
+ * <li> Nachrichten müssen mit einer eindeutigen Message-ID verschickt werden.
+ * <li> Für den Versand muss "Publish-Confirm" verwendet werden. Dies stellt sicher, dass eine Nachricht von der Plattform korrekt verarbeitet wurde.
  *   Bleibt die Bestätigung aus, ist die Nachricht erneut zu senden.
- * - Das Auto-Connect-Feature des Clients sollte verwendet werden
- * - Der Consumer sollte den Erhalt von Nachrichten explitit bestätigen, wenn diese verarbeitet wurden. Die Funktion autoAck sollte daher nicht
+ * <li> Das Auto-Connect-Feature des Clients sollte verwendet werden
+ * <li> Der Consumer sollte den Erhalt von Nachrichten explitit bestätigen, wenn diese verarbeitet wurden. Die Funktion autoAck sollte daher nicht
  *   verwendet werden.  
- * - Es ist sinnvoll, unterschiedliche Channels zum Schreiben und Lesen zu verwenden. 
- * 
- * Der Beispielcode zeigt eine mögliche Umsetzung dieser Rahmenbedingungen mit dem Java-Client.
+ * <li> Es ist sinnvoll, unterschiedliche Channels zum Schreiben und Lesen zu verwenden. 
+ * </ul>
+ * <p>Der Beispielcode zeigt eine mögliche Umsetzung dieser Rahmenbedingungen mit dem Java-Client.
  *  
  * @author mwyraz
  *

@@ -113,7 +113,7 @@ public class SimpleQueue
                 }
                 catch (IOException ex)
                 {
-                    /**
+                    /*
                      * Das ACK konnte nicht verschickt werden. Fehlerbehandlung bzw. loggen.
                      * Da ACK möglich war, wird die Plattform die Nachricht bei der nächsten
                      * Verbindung erneut senden. Es liegt in der Verantwortung des Clients,
