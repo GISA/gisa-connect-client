@@ -17,16 +17,15 @@ einem erklärenden Testfall `de.gisa.connect.client.GisaConnectDemoClientTest`.
 
 Aktueller Ansprechpartner für Fragen zur Anbindung ist
  
-Jos Anthonijsz<br />
-Bereichsleiter Innovation und PreSales<br />
-Head of GISA InnovationCenter<br />
+Ralf Heydenreich<br />
+Anwendungsbetreuung / Entwicklung<br />
  
 GISA GmbH<br />
 Leipziger Chaussee 191a<br />
 06112 Halle (Saale)<br />
 
-E-Mail 	Jos.Anthonijsz@gisa.de<br />
-Internet 	[www.gisa.de](url "www.gisa.de") 
+E-Mail 	Ralf.Heydenreich@gisa.de<br />
+Internet [www.gisa.de](url "www.gisa.de") 
 
 
 Sofern vertraglich nicht anderes vereinbart ist bleibt GISA hinsichtlich aller im o. g. Projekt
