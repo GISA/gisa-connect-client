@@ -43,7 +43,7 @@ import de.gisa.connect.client.SimpleQueue;
  * <li> Für den Versand muss "Publish-Confirm" verwendet werden. Dies stellt sicher, dass eine Nachricht von der Plattform korrekt verarbeitet wurde.
  *   Bleibt die Bestätigung aus, ist die Nachricht erneut zu senden.
  * <li> Das Auto-Connect-Feature des Clients sollte verwendet werden
- * <li> Der Consumer sollte den Erhalt von Nachrichten explitit bestätigen, wenn diese verarbeitet wurden. Die Funktion autoAck sollte daher nicht
+ * <li> Der Consumer sollte den Erhalt von Nachrichten explizit bestätigen, wenn diese verarbeitet wurden. Die Funktion <tt>autoAck</tt> sollte daher nicht
  *   verwendet werden.  
  * <li> Es ist sinnvoll, unterschiedliche Channels zum Schreiben und Lesen zu verwenden. 
  * </ul>
@@ -57,8 +57,8 @@ public class GisaConnectDemoClientTest
     @Test
     public void testMessagePingPong() throws Exception
     {
-        try (GisaConnectClient demo1=new GisaConnectClient("test.connect.gisa.de",false,"demo1","aoQuIXie","demo1-ex");
-             GisaConnectClient demo2=new GisaConnectClient("test.connect.gisa.de",false,"demo2","IelaitCw","demo2-ex"))
+        try (GisaConnectClient demo1=new GisaConnectClient("cust-connect.gisa.de",false,"demo1","aoQuIXie","demo1-ex");
+             GisaConnectClient demo2=new GisaConnectClient("cust-connect.gisa.de",false,"demo2","IelaitCw","demo2-ex"))
         {
             Thread.sleep(100);
             SimpleQueue demo2queue=demo2.consume("demo2-q-queue1");
